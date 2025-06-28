@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>EVM chains - BlockchainSpider</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "EVM chains";
+        var mkdocs_page_input_path = "spiders\\transaction\\evm.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BlockchainSpider
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spiders</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" >Transfer Subgraph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../transfer_subgraph/blockscan/">Blockscan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../transfer_subgraph/tronscan/">Tronscan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../transfer_subgraph/blockchaininfo/">BlockchainInfo</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Transactions</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">EVM chains</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#collect-by-block-number">Collect by block number</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#collect-by-transaction-hash">Collect by transaction hash</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-middlewares">Available middlewares</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../solana/">Solana</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Label</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/cryptoscamdb/">CryptoScamDB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/ofac/">OFAC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/tor/">Tor</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advance</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/pipeline/">Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/proxy/">Proxy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/transaction_tracing/">Transaction tracing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/rabbitmq/">RabbitMQ Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/mots/">MoTS Pipeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BlockchainSpider</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spiders</li>
+          <li class="breadcrumb-item">Transactions</li>
+      <li class="breadcrumb-item active">EVM chains</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="evm-compatible-chains">EVM-compatible chains</h1>
+<p>BlockchainSpider provides a spider to collect transaction data from EVM-compatible chains, such as Ethereum, BNBChain, Polygon, etc.
+You can find all EVM-compatible chains in <a href="https://chainlist.org/">chainlist.org</a>.</p>
+<h2 id="collect-by-block-number">Collect by block number</h2>
+<p>To collect blockchain data by block number, use the following command:</p>
+<pre><code class="language-shell">scrapy crawl trans.block.evm \
+-a providers=https://eth.llamarpc.com \
+-a start_blk=19000000 \
+-a end_blk=19000100 \
+-a out=/path/to/your/data \
+-a enable=BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware,BlockchainSpider.middlewares.trans.TokenTransferMiddleware
+</code></pre>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>providers</code>: The RPC providers URL for accessing the EVM-compatible blockchain. If you have multiple providers, join them with commas.
+It is recommended that you build your own blockchain nodes,
+or get providers from blockchain data services, e.g., <a href="https://www.alchemy.com/">alchemy</a>, <a href="https://chainnodes.org/">chainnodes</a>, etc.</li>
+<li><code>start_blk</code>: The starting block number for data collection.</li>
+<li><code>end_blk</code>: (<strong>optional</strong>) The ending block number for data collection, if not specified, it will continuously listen and parse the latest block data.</li>
+<li><code>out</code>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
+<li><code>enable</code>: (<strong>optional</strong>) Specifies middlewares to activate during the spider run. 
+Note that different middlewares may product different items, e.g., receipts, logs, and traces.
+If you enable multiple middlewares, join them with commas.
+Please refer to the <a href="#available_middlewares">available middlewares</a> for more details.</li>
+</ul>
+<h2 id="collect-by-transaction-hash">Collect by transaction hash</h2>
+<p>To collect blockchain data by transaction hash, use the following command:</p>
+<pre><code class="language-shell">scrapy crawl trans.evm \
+-a providers=https://eth.llamarpc.com \
+-a hash=0xyour...txhash \ 
+-a out=/path/to/your/data \
+-a enable=BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware,BlockchainSpider.middlewares.trans.TokenTransferMiddleware
+</code></pre>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>providers</code>: The RPC providers URL for accessing the EVM-compatible blockchain. If you have multiple providers, join them with commas.
+It is recommended that you build your own blockchain nodes,
+or get providers from blockchain data services, e.g., <a href="https://www.alchemy.com/">alchemy</a>, <a href="https://chainnodes.org/">chainnodes</a>, etc.</li>
+<li><code>hash</code>: The transaction hash for data collection. If you have multiple hashes, join them with commas.</li>
+<li><code>out</code>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
+<li><code>enable</code>: (<strong>optional</strong>) Specifies middlewares to activate during the spider run. 
+Note that different middlewares may product different items, e.g., receipts, logs, and traces.
+If you enable multiple middlewares, join them with commas.
+Please refer to the <a href="#available_middlewares">available middlewares</a> for more details.</li>
+</ul>
+<p><span id="available_middlewares"></span></p>
+<h2 id="available-middlewares">Available middlewares</h2>
+<p>BlockchainSpider provides several middlewares to collect different types of data:</p>
+<ul>
+<li><strong>BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware</strong>:
+collect transaction receipts when transaction spiders running.</li>
+<li><strong>BlockchainSpider.middlewares.trans.TokenTransferMiddleware</strong>:
+parse (ERC20, ERC721, and ERC1155) token transfer when transaction 
+spiders running. Note that this middleware is available if <code>BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware</code>
+is enabled at the same time. Enabling this middleware alone will not any effect.</li>
+<li><strong>BlockchainSpider.middlewares.trans.TokenPropertyMiddleware</strong>:
+parse the token name, decimals, and other ERC token properties when transaction 
+spiders running. Note that this middleware is available if
+<code>BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware</code> and 
+<code>BlockchainSpider.middlewares.trans.TokenTransferMiddleware</code>
+are enabled at the same time. Enabling this middleware alone will not any effect.</li>
+<li><strong>BlockchainSpider.middlewares.trans.MetadataMiddleware</strong>:
+Collects NFT metadata during the spider run.</li>
+<li><strong>BlockchainSpider.middlewares.trans.TraceMiddleware</strong>:
+Collects transaction call traces during the spider run.</li>
+<li><strong>BlockchainSpider.middlewares.trans.ContractMiddleware</strong>:
+Extract the contract bytecode if the collected block contains a contract creation transaction.
+Note that this middleware requires <code>BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware</code> to be enabled simultaneously.</li>
+<li><strong>BlockchainSpider.middlewares.trans.DCFGMiddleware</strong>:
+Collects dynamic control flow graph (DCFG) data during the spider run.
+If you are not familiar with DCFG, please refer to the Appendix in this <a href="https://dl.acm.org/doi/pdf/10.1145/3696410.3714928">paper</a> for more details.</li>
+</ul>
+<p>💡 All of collected data are defined in <a href="https://github.com/wuzhy1ng/BlockchainSpider/blob/master/BlockchainSpider/items/evm.py">BlockchainSpider/items/evm.py</a>, 
+and you can find the corresponding data structure there.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../transfer_subgraph/blockchaininfo/" class="btn btn-neutral float-left" title="BlockchainInfo"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../solana/" class="btn btn-neutral float-right" title="Solana">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../transfer_subgraph/blockchaininfo/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../solana/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Transaction tracing - BlockchainSpider</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Transaction tracing";
+        var mkdocs_page_input_path = "advance\\transaction_tracing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> BlockchainSpider
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spiders</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Transfer Subgraph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/transfer_subgraph/blockscan/">Blockscan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/transfer_subgraph/tronscan/">Tronscan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/transfer_subgraph/blockchaininfo/">BlockchainInfo</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Transactions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/transaction/evm/">EVM chains</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/transaction/solana/">Solana</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Label</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/label/cryptoscamdb/">CryptoScamDB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/label/ofac/">OFAC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spiders/label/tor/">Tor</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advance</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../pipeline/">Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../proxy/">Proxy</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Transaction tracing</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#customise-your-own-strategy">Customise your own strategy</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../plugins/rabbitmq/">RabbitMQ Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../plugins/mots/">MoTS Pipeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">BlockchainSpider</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Advance</li>
+      <li class="breadcrumb-item active">Transaction tracing</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="graph-based-transaction-tracing">Graph-based Transaction tracing</h1>
+<p>The transaction subgraph spiders aim at collecting the transactions (or token transfers) related to the specific source
+addresses.
+BlockchainSpider provides the following strategies for sampling:</p>
+<ul>
+<li><strong>BlockchainSpider.strategies.txs.BFS</strong>: Breath-First Search.</li>
+<li><strong>BlockchainSpider.strategies.txs.Poison</strong>: A kind of taint analysis technology.</li>
+<li><strong>BlockchainSpider.strategies.txs.Haircut</strong>: A kind of taint analysis technology.</li>
+<li><strong>BlockchainSpider.strategies.txs.APPR</strong>: the Approximate Personalized PageRank algorithm.</li>
+<li><strong>BlockchainSpider.strategies.txs.TTRRedirect</strong>: the Transaction Tracing Rank algorithm.</li>
+</ul>
+<p>The performance comparison of the above strategies is as follows:
+<img alt="Performance comparison" src="../comparison.png" /></p>
+<p>All transaction subgraph spiders are implemented based on the framework graph expansion,
+which has four core operations:</p>
+<ul>
+<li><strong>Expand</strong>: collects all transactions related to a given address.</li>
+<li><strong>Push</strong>: merges the collected transactions to the subgraph.</li>
+<li><strong>Rank</strong>: computes the relevance of addresses in the subgraph to the source address.</li>
+<li><strong>Pop</strong>: select an address for expanding.</li>
+</ul>
+<p><img alt="Graph expansion" src="../graph_expansion.png" /></p>
+<p>The implementation of different strategies are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Push &amp; Rank</th>
+<th>Pop &amp; Expand</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS</td>
+<td>Add expanded neighbors to a queue</td>
+<td>Select a unexpanded node in the header of the queue for expanding</td>
+</tr>
+<tr>
+<td>Poison</td>
+<td>Add expanded out-degree neighbors to a queue</td>
+<td>Select a unexpanded node in the header of the queue for expanding</td>
+</tr>
+<tr>
+<td>Haircut</td>
+<td>Allocated the pollution value to the neighbors according to the edge weight</td>
+<td>Select a unexpanded node with the highest pollution for expanding</td>
+</tr>
+<tr>
+<td>APPR</td>
+<td>Use the local push procedure for extended neighbors</td>
+<td>Select a node with the highest residual for expanding</td>
+</tr>
+<tr>
+<td>TTR</td>
+<td>Use the TTR local push procedure for extended neighbors</td>
+<td>Select a node with the highest residual for expanding</td>
+</tr>
+</tbody>
+</table>
+<p>💡 For more details, please refer to the paper: <a href="https://ieeexplore.ieee.org/abstract/document/10098630">TRacer: Scalable Graph-Based Transaction Tracing for Account-Based Blockchain Trading Systems</a>.</p>
+<h2 id="customise-your-own-strategy">Customise your own strategy</h2>
+<p>You can implement your own strategy by inheriting the <code>BlockchainSpider.strategies.txs.PushPopModel</code> class.
+Here's the simplest example, in which for each Ethereum address, we track only the output money transfer with the largest Ether value.</p>
+<p><strong>First</strong>, we create a new file <code>mystg.py</code> in the root directory of the project and declare a PushPopModel class:</p>
+<pre><code class="language-python">from typing import Any, Dict, Tuple
+from BlockchainSpider.strategies.txs import PushPopModel
+
+class MyStrategy(PushPopModel):
+    def __init__(self, source, **kwargs):
+        super().__init__(source, **kwargs)
+        self.to_be_vis = set()
+
+    def push(self, node, edges: list, **kwargs):
+        # node is the address of the current node
+        # edges is a list of money transfers related to the current address
+        # each edge is a dict with fields as TransferItem, e.g., `AccountTransferItem`,
+        # please refer to the fields at `BlockchainSpider/items/subgraph.py`
+        edges = [edge for edge in edges if edge['address_from'] == node]
+        if len(edges) == 0:
+            return 
+        edges.sort(key=lambda x: int(x['value']), reverse=True)
+        self.to_be_vis.add(edges[0]['address_to']) 
+
+    def pop(self) -&gt; Tuple[Any, Dict]:
+        if len(self.to_be_vis) == 0:
+            return None, {}
+        node = self.to_be_vis.pop()
+
+        # the returned dictionary will be used as the kwargs for the next push
+        # we don't need to pass the context, so we return the empty dictionary
+        return node, {}
+
+    def get_context_snapshot(self) -&gt; Dict:
+        return {'to be visited': self.to_be_vis}
+
+    def get_node_rank(self) -&gt; Dict:
+        return {}
+</code></pre>
+<p><strong>Next</strong>, you can start the <code>txs.blockscan</code> spider and mount the new strategy:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \ 
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=mystg.MyStrategy
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../proxy/" class="btn btn-neutral float-left" title="Proxy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../plugins/rabbitmq/" class="btn btn-neutral float-right" title="RabbitMQ Pipeline">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../proxy/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../plugins/rabbitmq/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

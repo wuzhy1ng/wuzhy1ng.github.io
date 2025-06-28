@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Blockscan - BlockchainSpider</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Blockscan";
+        var mkdocs_page_input_path = "spiders\\transfer_subgraph\\blockscan.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BlockchainSpider
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spiders</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Transfer Subgraph</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Blockscan</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-middlewares">Available middlewares</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#support-chains">Support chains</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../tronscan/">Tronscan</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../blockchaininfo/">BlockchainInfo</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Transactions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../transaction/evm/">EVM chains</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../transaction/solana/">Solana</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Label</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/cryptoscamdb/">CryptoScamDB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/ofac/">OFAC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/tor/">Tor</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advance</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/pipeline/">Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/proxy/">Proxy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/transaction_tracing/">Transaction tracing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/rabbitmq/">RabbitMQ Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/mots/">MoTS Pipeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BlockchainSpider</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spiders</li>
+          <li class="breadcrumb-item">Transfer Subgraph</li>
+      <li class="breadcrumb-item active">Blockscan</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="blockscan">Blockscan</h1>
+<p>The <code>txs.blockscan</code> spider is designed to collect transaction data from blockscan explorers like
+Etherscan. 
+Specifically, <code>txs.blockscan</code> aims at searching for the source and destination of funds from a given <strong>address</strong>.</p>
+<h2 id="usage">Usage</h2>
+<p>To run the spider, use the following command:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a endpoint=https://api.etherscan.io/api \
+-a strategy=BlockchainSpider.strategies.txs.BFS \
+-a allowed_tokens=0xTokenAddress1,0xTokenAddress2 \
+-a out=/path/to/your/data \
+-a out_fields=hash,address_from,address_to,value,token_id,timestamp,block_number,contract_address,symbol,decimals \
+-a enable=BlockchainSpider.middlewares.txs.blockscan.ExternalTransferMiddleware,BlockchainSpider.middlewares.txs.blockscan.Token20TransferMiddleware \
+-a start_blk=1000000 \
+-a end_blk=1500000 \
+-a max_pages=1 \
+-a max_page_size=10000
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong><code>source</code></strong>: The source address to start collecting transactions. This parameter is required.</li>
+<li><strong><code>apikeys</code></strong>: A comma-separated list of API keys for accessing the blockchain explorer. At least one API key is
+  required.</li>
+<li><strong><code>endpoint</code></strong>: (<strong>optional</strong>) The API endpoint of the blockchain explorer.
+  Default is <code>https://api.etherscan.io/api</code>.
+  See the <a href="#support-chains">support chains</a> section for more endpoints.</li>
+<li><strong><code>strategy</code></strong>: (<strong>optional</strong>) The traversal strategy for collecting transactions.
+  Default is <code>BlockchainSpider.strategies.txs.BFS</code> (Breadth-First Search).
+  BlockchainSpider implements other advanced strategies, e.g., Poison, APPR, and TTR.
+  For more details, please refer to <a href="/advance/transaction_tracing/">Transaction tracing</a> section.</li>
+<li><strong><code>allowed_tokens</code></strong>: (<strong>optional</strong>) A comma-separated list of token contract addresses to filter token transfers.
+  If not provided, all tokens are included.
+  It should be noted that some strategies (especially TTR methods) may automatically analyze token types and collect
+  token transfer records that are different from the given type.</li>
+<li><strong><code>out</code></strong>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
+<li><strong><code>out_fields</code></strong>: (<strong>optional</strong>) A comma-separated list of fields to include in the output.
+  the default is
+  <code>address_from,address_to,block_number,contract_address,decimals,gas,gas_price,hash,id,symbol,timestamp,token_id,value</code>,
+  and other fields include <code>isError</code>, <code>input</code>, and <code>nonce</code>.</li>
+<li><strong><code>enable</code></strong>: (<strong>optional</strong>) A comma-separated list of middlewares to enable during the spider run.
+  Add different middlewares to trace different types of assets.
+  See the <a href="#available-middlewares">available middleware</a> section for details.
+  The default is <code>BlockchainSpider.middlewares.txs.blockscan.ExternalTransferMiddleware</code>.</li>
+<li><strong><code>start_blk</code></strong>: (<strong>optional</strong>) The starting block number for data searching.
+  If not specified, the spider will start from the first block.</li>
+<li><strong><code>end_blk</code></strong>: (<strong>optional</strong>) The ending block number for data searching.
+  If not specified, the spider will search the data until the latest block.</li>
+<li><strong><code>max_pages</code></strong>: (<strong>optional</strong>) Maximum number of money transfer pages per middleware request for an address. Default is <code>1</code>.</li>
+<li><strong><code>max_page_size</code></strong>: (<strong>optional</strong>) Maximum number of money transfers per page (&lt;=10000). Default is <code>10000</code>.</li>
+</ul>
+<p><span id="available_middlewares"></span></p>
+<h2 id="available-middlewares">Available middlewares</h2>
+<p>The spider uses several middlewares to handle different types of token transfers.
+Below are the available middlewares and their functionalities:</p>
+<ul>
+<li><strong><code>BlockchainSpider.middlewares.txs.blockscan.ExternalTransferMiddleware</code></strong>: Trace external transfers (e.g., ETH
+  transfers) from the transaction data.</li>
+<li><strong><code>BlockchainSpider.middlewares.txs.blockscan.InternalTransferMiddleware</code></strong>: Trace internal transfers (e.g.,
+  contract-to-contract calls) from the transaction data.</li>
+<li><strong><code>BlockchainSpider.middlewares.txs.blockscan.Token20TransferMiddleware</code></strong>: Trace ERC-20 token transfers from the
+  transaction data.</li>
+<li><strong><code>BlockchainSpider.middlewares.txs.blockscan.Token721TransferMiddleware</code></strong>: Trace ERC-721 (NFT) token transfers from
+  the transaction data.</li>
+</ul>
+<p><span id="support_chains"></span></p>
+<h2 id="support-chains">Support chains</h2>
+<table>
+<thead>
+<tr>
+<th>Chain</th>
+<th>Apply for your apikeys</th>
+<th>API Endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ethereum</td>
+<td><a href="https://etherscan.io">etherscan.io</a></td>
+<td><a href="https://api.etherscan.io/api">https://api.etherscan.io/api</a></td>
+</tr>
+<tr>
+<td>Ape</td>
+<td><a href="https://apescan.io">apescan.io</a></td>
+<td><a href="https://api.apescan.io/api">https://api.apescan.io/api</a></td>
+</tr>
+<tr>
+<td>Arbitrum One</td>
+<td><a href="https://arbiscan.io">arbiscan.io</a></td>
+<td><a href="https://api.arbiscan.io/api">https://api.arbiscan.io/api</a></td>
+</tr>
+<tr>
+<td>Arbitrum Nova</td>
+<td><a href="https://nova.arbiscan.io">nova.arbiscan.io</a></td>
+<td><a href="https://api-nova.arbiscan.io/api">https://api-nova.arbiscan.io/api</a></td>
+</tr>
+<tr>
+<td>Base</td>
+<td><a href="https://basescan.org">basescan.org</a></td>
+<td><a href="https://api.basescan.org/api">https://api.basescan.org/api</a></td>
+</tr>
+<tr>
+<td>Bera</td>
+<td><a href="https://berascan.com">berascan.com</a></td>
+<td><a href="https://api.berascan.com/api">https://api.berascan.com/api</a></td>
+</tr>
+<tr>
+<td>Blast Chain</td>
+<td><a href="https://blastscan.io">blastscan.io</a></td>
+<td><a href="https://api.blastscan.io/api">https://api.blastscan.io/api</a></td>
+</tr>
+<tr>
+<td>BNB Chain</td>
+<td><a href="https://bscscan.com">bscscan.com</a></td>
+<td><a href="https://api.bscscan.com/api">https://api.bscscan.com/api</a></td>
+</tr>
+<tr>
+<td>BTTC</td>
+<td><a href="https://bttcscan.com">bttcscan.com</a></td>
+<td><a href="https://api.bttcscan.com/api">https://api.bttcscan.com/api</a></td>
+</tr>
+<tr>
+<td>Celo</td>
+<td><a href="https://celoscan.io">celoscan.io</a></td>
+<td><a href="https://api.celoscan.io/api">https://api.celoscan.io/api</a></td>
+</tr>
+<tr>
+<td>Cronos</td>
+<td><a href="https://cronoscan.com">cronoscan.com</a></td>
+<td><a href="https://api.cronoscan.com/api">https://api.cronoscan.com/api</a></td>
+</tr>
+<tr>
+<td>Frax Chain</td>
+<td><a href="https://fraxscan.com">fraxscan.com</a></td>
+<td><a href="https://api.fraxscan.com/api">https://api.fraxscan.com/api</a></td>
+</tr>
+<tr>
+<td>Gnosis</td>
+<td><a href="https://gnosisscan.io">gnosisscan.io</a></td>
+<td><a href="https://api.gnosisscan.io/api">https://api.gnosisscan.io/api</a></td>
+</tr>
+<tr>
+<td>Linea</td>
+<td><a href="https://lineascan.build">lineascan.build</a></td>
+<td><a href="https://api.lineascan.build/api">https://api.lineascan.build/api</a></td>
+</tr>
+<tr>
+<td>Mantle</td>
+<td><a href="https://mantlescan.xyz">mantlescan.xyz</a></td>
+<td><a href="https://api.mantlescan.xyz/api">https://api.mantlescan.xyz/api</a></td>
+</tr>
+<tr>
+<td>MemeCore</td>
+<td><a href="https://memecorescan.io">memecorescan.io</a></td>
+<td><a href="https://api.memecorescan.io/api">https://api.memecorescan.io/api</a></td>
+</tr>
+<tr>
+<td>Moonbeam</td>
+<td><a href="https://moonbeam.moonscan.io">moonbeam.moonscan.io</a></td>
+<td><a href="https://api-moonbeam.moonscan.io/api">https://api-moonbeam.moonscan.io/api</a></td>
+</tr>
+<tr>
+<td>Moonriver</td>
+<td><a href="https://moonriver.moonscan.io">moonriver.moonscan.io</a></td>
+<td><a href="https://api-moonriver.moonscan.io/api">https://api-moonriver.moonscan.io/api</a></td>
+</tr>
+<tr>
+<td>opBNB</td>
+<td><a href="https://opbnb.bscscan.com/">opbnb.bscscan.com</a></td>
+<td><a href="https://api-opbnb.bscscan.com/api">https://api-opbnb.bscscan.com/api</a></td>
+</tr>
+<tr>
+<td>Optimism</td>
+<td><a href="https://optimistic.etherscan.io">optimistic.etherscan.io</a></td>
+<td><a href="https://api-optimistic.etherscan.io/api">https://api-optimistic.etherscan.io/api</a></td>
+</tr>
+<tr>
+<td>Polygon zkEVM</td>
+<td><a href="https://zkevm.polygonscan.com">zkevm.polygonscan.com</a></td>
+<td><a href="https://api-zkevm.polygonscan.com/api">https://api-zkevm.polygonscan.com/api</a></td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td><a href="https://polygonscan.com">polygonscan.com</a></td>
+<td><a href="https://api.polygonscan.com/api">https://api.polygonscan.com/api</a></td>
+</tr>
+<tr>
+<td>Scroll</td>
+<td><a href="https://scrollscan.com">scrollscan.com</a></td>
+<td><a href="https://api.scrollscan.com/api">https://api.scrollscan.com/api</a></td>
+</tr>
+<tr>
+<td>Avax C-Chain</td>
+<td><a href="https://snowtrace.io">snowtrace.io</a></td>
+<td><a href="https://api.snowtrace.io/api">https://api.snowtrace.io/api</a></td>
+</tr>
+<tr>
+<td>Sonic</td>
+<td><a href="https://sonicscan.org">sonicscan.org</a></td>
+<td><a href="https://api.sonicscan.org/api">https://api.sonicscan.org/api</a></td>
+</tr>
+<tr>
+<td>Sophon</td>
+<td><a href="https://sophscan.xyz">sophscan.xyz</a></td>
+<td><a href="https://api.sophscan.xyz/api">https://api.sophscan.xyz/api</a></td>
+</tr>
+<tr>
+<td>Swell Chain</td>
+<td><a href="https://swellchainscan.io">swellchainscan.io</a></td>
+<td><a href="https://api.swellchainscan.io/api">https://api.swellchainscan.io/api</a></td>
+</tr>
+<tr>
+<td>Taiko</td>
+<td><a href="https://taikoscan.io">taikoscan.io</a></td>
+<td><a href="https://api.taikoscan.io/api">https://api.taikoscan.io/api</a></td>
+</tr>
+<tr>
+<td>unichain</td>
+<td><a href="https://uniscan.xyz">uniscan.xyz</a></td>
+<td><a href="https://api.uniscan.xyz/api">https://api.uniscan.xyz/api</a></td>
+</tr>
+<tr>
+<td>Wemix</td>
+<td><a href="https://wemixscan.com">wemixscan.com</a></td>
+<td><a href="https://api.wemixscan.com/api">https://api.wemixscan.com/api</a></td>
+</tr>
+<tr>
+<td>World</td>
+<td><a href="https://worldscan.org">worldscan.org</a></td>
+<td><a href="https://api.worldscan.org/api">https://api.worldscan.org/api</a></td>
+</tr>
+<tr>
+<td>Xai</td>
+<td><a href="https://xaiscan.io">xaiscan.io</a></td>
+<td><a href="https://api.xaiscan.io/api">https://api.xaiscan.io/api</a></td>
+</tr>
+<tr>
+<td>Xdc</td>
+<td><a href="https://xdcscan.io">xdcscan.io</a></td>
+<td><a href="https://api.xdcscan.io/api">https://api.xdcscan.io/api</a></td>
+</tr>
+<tr>
+<td>zkSync Era</td>
+<td><a href="https://era.zksync.network">era.zksync.network</a></td>
+<td><a href="https://api-era.zksync.network/api">https://api-era.zksync.network/api</a></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tronscan/" class="btn btn-neutral float-right" title="Tronscan">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../tronscan/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

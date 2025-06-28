@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Tronscan - BlockchainSpider</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tronscan";
+        var mkdocs_page_input_path = "spiders\\transfer_subgraph\\tronscan.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> BlockchainSpider
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spiders</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Transfer Subgraph</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../blockscan/">Blockscan</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Tronscan</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-middlewares">Available middlewares</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../blockchaininfo/">BlockchainInfo</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Transactions</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../transaction/evm/">EVM chains</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../transaction/solana/">Solana</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Label</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/cryptoscamdb/">CryptoScamDB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/ofac/">OFAC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../label/tor/">Tor</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advance</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/pipeline/">Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/proxy/">Proxy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../advance/transaction_tracing/">Transaction tracing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Plugins</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/rabbitmq/">RabbitMQ Pipeline</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../plugins/mots/">MoTS Pipeline</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">BlockchainSpider</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spiders</li>
+          <li class="breadcrumb-item">Transfer Subgraph</li>
+      <li class="breadcrumb-item active">Tronscan</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="tronscan">Tronscan</h1>
+<p>The <code>txs.tronscan</code> is designed to fetch transfer subgraph from the <code>Tron</code> blockchain explorer, i.e., <code>tronscan.org</code>.
+Specifically, <code>txs.tronscan</code> aims at searching for the source and destination of funds from a given <strong>address</strong>.</p>
+<h2 id="usage">Usage</h2>
+<p>Run the spider using the following command:</p>
+<pre><code class="language-shell">scrapy crawl txs.tronscan \
+-a source=YourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.BFS \
+-a allowed_tokens=TokenAddress1,TokenAddress2 \
+-a out=/path/to/your/data \
+-a out_fields=hash,address_from,address_to,value,token_id,timestamp,block_number,contract_address,symbol,decimals \
+-a enable=BlockchainSpider.middlewares.txs.tronscan.TRXTRC10TransferMiddleware \
+-a start_timestamp=1750000000 \
+-a end_timestamp=1751000000 \
+-a max_pages=20 \
+-a max_page_size=50
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong><code>source</code></strong>: The starting address for collecting transaction data. This parameter is required.</li>
+<li><strong><code>apikeys</code></strong>: A comma-separated list of API keys for accessing the blockchain explorer.
+  At least one API key is required.
+  You can apply your API key from <a href="https://tronscan.org">tronscan.org</a>.</li>
+<li><strong><code>strategy</code></strong>: (<strong>optional</strong>) The traversal strategy for collecting transactions.
+  Default is <code>BlockchainSpider.strategies.txs.BFS</code> (Breadth-First Search).
+  BlockchainSpider implements other advanced strategies, e.g., Poison, APPR, and TTR.
+  For more details, please refer to <a href="/advance/transaction_tracing/">Transaction tracing</a> section.</li>
+<li><strong><code>allowed_tokens</code></strong>: (<strong>optional</strong>) A comma-separated list of token contract addresses to filter transactions. If not
+  provided, all
+  tokens are included.</li>
+<li><strong><code>out</code></strong>: (<strong>optional</strong>) The output directory for storing the collected data. Default is <code>./data</code>.</li>
+<li><strong><code>out_fields</code></strong>: (<strong>optional</strong>) A comma-separated list of fields to include in the output.
+  the default is
+  <code>address_from,address_to,block_number,contract_address,decimals,gas,gas_price,hash,id,symbol,timestamp,token_id,value</code>.</li>
+<li><strong><code>enable</code></strong>: (<strong>optional</strong>) A comma-separated list of middlewares to enable during the spider run. Add different
+  middlewares to
+  trace specific types of assets. The default is <code>BlockchainSpider.middlewares.txs.tronscan.TRXTRC10TransferMiddleware</code>.</li>
+<li><strong><code>start_timestamp</code></strong>: (<strong>optional</strong>) The starting timestamp for data searching.
+  If not specified, the spider will start from the timestamp of the first block.</li>
+<li><strong><code>end_timestamp</code></strong>: (<strong>optional</strong>) The ending timestamp for data searching.
+  If not specified, the spider will search the data until now.</li>
+<li><strong><code>max_pages</code></strong>: (<strong>optional</strong>) Maximum number of money transfer pages per middleware request for an address. Default
+  is <code>20</code>.</li>
+<li><strong><code>max_page_size</code></strong>: (<strong>optional</strong>) Maximum number of money transfers per page (&lt;=50). Default is <code>50</code>.</li>
+</ul>
+<h2 id="available-middlewares">Available middlewares</h2>
+<p>The spider uses several middlewares to handle different types of token transfers. Below are the available middlewares
+and their functionalities:</p>
+<ul>
+<li><strong><code>BlockchainSpider.middlewares.txs.tronscan.TRXTRC10TransferMiddleware</code></strong>: Traces native token (i.e., TRX) transfers
+  and TRC10 token transfers from transaction data.</li>
+<li><strong><code>BlockchainSpider.middlewares.txs.tronscan.TRC20TRC721TransferMiddleware</code></strong>: Traces TRC-20 and TRC-721 token
+  transfers.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../blockscan/" class="btn btn-neutral float-left" title="Blockscan"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../blockchaininfo/" class="btn btn-neutral float-right" title="BlockchainInfo">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../blockscan/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../blockchaininfo/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
