@@ -71,6 +71,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#collect-by-transaction-hash">Collect by transaction hash</a>
+    </li>
     </ul>
                 </li>
     </ul>
@@ -139,18 +141,39 @@
 -a end_slot=349486000 \
 -a out=/path/to/your/data
 </code></pre>
+<p>Another example to listen the latest transactions in Ethereum:</p>
+<pre><code class="language-shell">scrapy crawl trans.block.solana \
+-a providers=https://your.provider.solana \
+-a out=/path/to/your/data
+</code></pre>
 <h3 id="parameters">Parameters:</h3>
 <ul>
 <li><strong><code>providers</code></strong>: The RPC provider URL for accessing the Solana.
 If you have multiple providers, separate them with commas.
 It is recommended that you get providers from blockchain data services, e.g., <a href="https://www.alchemy.com/">alchemy</a>.</li>
-<li><strong><code>start_slot</code></strong>: The starting slot number for data collection.</li>
+<li><strong><code>start_slot</code></strong>: (<strong>optional</strong>) The starting slot number for data collection.
+if not specified, the spider will start from the latest slot.</li>
 <li><strong><code>end_slot</code></strong>: (<strong>optional</strong>) The ending slot number for data collection.
 If not specified, the spider will continuously listen and parse the latest slot data.</li>
 <li><strong><code>out</code></strong>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
 </ul>
 <p>💡 All collected data structures are defined in <a href="https://github.com/wuzhy1ng/BlockchainSpider/blob/master/BlockchainSpider/items/solana.py">BlockchainSpider/items/solana.py</a>.
 Refer to the corresponding code for detailed data structures.</p>
+<h2 id="collect-by-transaction-hash">Collect by transaction hash</h2>
+<p>To collect blockchain data by transaction hash, use the following command:</p>
+<pre><code class="language-shell">scrapy crawl trans.solana \
+-a providers=https://your.provider.solana \
+-a signature=3AL2h...Nts \ 
+-a out=/path/to/your/data
+</code></pre>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>providers</code>: The RPC providers URL for accessing the EVM-compatible blockchain. If you have multiple providers, join them with commas.
+It is recommended that you build your own blockchain nodes,
+or get providers from blockchain data services, e.g., <a href="https://www.alchemy.com/">alchemy</a>, <a href="https://drpc.org/">drpc</a>, etc.</li>
+<li><code>signature</code>: The transaction signature for data collection. If you have multiple signatures, join them with commas.</li>
+<li><code>out</code>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
+</ul>
               
             </div>
           </div><footer>

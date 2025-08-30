@@ -141,12 +141,18 @@ You can find all EVM-compatible chains in <a href="https://chainlist.org/">chain
 -a out=/path/to/your/data \
 -a enable=BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware,BlockchainSpider.middlewares.trans.TokenTransferMiddleware
 </code></pre>
+<p>Another example to listen the latest transactions in Ethereum:</p>
+<pre><code class="language-shell">scrapy crawl trans.block.evm \
+-a providers=https://eth.llamarpc.com \
+-a out=/path/to/your/data \
+-a enable=BlockchainSpider.middlewares.trans.TransactionReceiptMiddleware,BlockchainSpider.middlewares.trans.TokenTransferMiddleware
+</code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>providers</code>: The RPC providers URL for accessing the EVM-compatible blockchain. If you have multiple providers, join them with commas.
 It is recommended that you build your own blockchain nodes,
 or get providers from blockchain data services, e.g., <a href="https://www.alchemy.com/">alchemy</a>, <a href="https://chainnodes.org/">chainnodes</a>, etc.</li>
-<li><code>start_blk</code>: The starting block number for data collection.</li>
+<li><code>start_blk</code>: (<strong>optional</strong>) The starting block number for data collection. If not specified, it will start from the latest block.</li>
 <li><code>end_blk</code>: (<strong>optional</strong>) The ending block number for data collection, if not specified, it will continuously listen and parse the latest block data.</li>
 <li><code>out</code>: (<strong>optional</strong>) The output directory for storing the collected data. The default is <code>./data</code>.</li>
 <li><code>enable</code>: (<strong>optional</strong>) Specifies middlewares to activate during the spider run. 
