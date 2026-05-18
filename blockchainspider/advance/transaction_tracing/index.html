@@ -88,6 +88,32 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Transaction tracing</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-pass-strategy-parameters">How to pass strategy parameters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#strategy-parameters">Strategy parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsbfs">BlockchainSpider.strategies.txs.BFS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxspoison">BlockchainSpider.strategies.txs.Poison</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxshaircut">BlockchainSpider.strategies.txs.Haircut</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsappr">BlockchainSpider.strategies.txs.APPR</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsttrbase">BlockchainSpider.strategies.txs.TTRBase</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsttrweight">BlockchainSpider.strategies.txs.TTRWeight</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsttrtime">BlockchainSpider.strategies.txs.TTRTime</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blockchainspiderstrategiestxsttrredirect">BlockchainSpider.strategies.txs.TTRRedirect</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parameter-selection-suggestions">Parameter selection suggestions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#customise-your-own-strategy">Customise your own strategy</a>
     </li>
     </ul>
@@ -125,25 +151,28 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="graph-based-transaction-tracing">Graph-based Transaction tracing</h1>
-<p>The transaction subgraph spiders aim at collecting the transactions (or token transfers) related to the specific source
-addresses.
-BlockchainSpider provides the following strategies for sampling:</p>
+<p>The transaction subgraph spiders aim at collecting the transactions (or token transfers) related to specific source
+addresses or transactions.
+BlockchainSpider provides the following built-in strategies:</p>
 <ul>
-<li><strong>BlockchainSpider.strategies.txs.BFS</strong>: Breath-First Search.</li>
-<li><strong>BlockchainSpider.strategies.txs.Poison</strong>: A kind of taint analysis technology.</li>
-<li><strong>BlockchainSpider.strategies.txs.Haircut</strong>: A kind of taint analysis technology.</li>
-<li><strong>BlockchainSpider.strategies.txs.APPR</strong>: the Approximate Personalized PageRank algorithm.</li>
-<li><strong>BlockchainSpider.strategies.txs.TTRRedirect</strong>: the Transaction Tracing Rank algorithm.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.BFS</code></strong>: Breadth-First Search.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.Poison</code></strong>: taint analysis that only propagates along outgoing transfers.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.Haircut</code></strong>: taint analysis that allocates pollution by transfer amount.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.APPR</code></strong>: Approximate Personalized PageRank.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.TTRBase</code></strong>: Transaction Tracing Rank with uniform edge distribution.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.TTRWeight</code></strong>: Transaction Tracing Rank with value-weighted distribution.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.TTRTime</code></strong>: time-aware Transaction Tracing Rank.</li>
+<li><strong><code>BlockchainSpider.strategies.txs.TTRRedirect</code></strong>: redirect-aware and token-aware Transaction Tracing Rank.</li>
 </ul>
 <p>The performance comparison of the above strategies is as follows:
 <img alt="Performance comparison" src="../comparison.png" /></p>
-<p>All transaction subgraph spiders are implemented based on the framework graph expansion,
+<p>All transaction subgraph spiders are implemented based on the graph expansion framework,
 which has four core operations:</p>
 <ul>
-<li><strong>Expand</strong>: collects all transactions related to a given address.</li>
+<li><strong>Expand</strong>: collects all transactions related to a given address or transaction.</li>
 <li><strong>Push</strong>: merges the collected transactions to the subgraph.</li>
-<li><strong>Rank</strong>: computes the relevance of addresses in the subgraph to the source address.</li>
-<li><strong>Pop</strong>: select an address for expanding.</li>
+<li><strong>Rank</strong>: computes the relevance of addresses in the subgraph to the source node.</li>
+<li><strong>Pop</strong>: select a node for expanding.</li>
 </ul>
 <p><img alt="Graph expansion" src="../graph_expansion.png" /></p>
 <p>The implementation of different strategies are as follows:</p>
@@ -159,37 +188,357 @@ which has four core operations:</p>
 <tr>
 <td>BFS</td>
 <td>Add expanded neighbors to a queue</td>
-<td>Select a unexpanded node in the header of the queue for expanding</td>
+<td>Select an unexpanded node in the header of the queue for expanding</td>
 </tr>
 <tr>
 <td>Poison</td>
 <td>Add expanded out-degree neighbors to a queue</td>
-<td>Select a unexpanded node in the header of the queue for expanding</td>
+<td>Select an unexpanded node in the header of the queue for expanding</td>
 </tr>
 <tr>
 <td>Haircut</td>
-<td>Allocated the pollution value to the neighbors according to the edge weight</td>
-<td>Select a unexpanded node with the highest pollution for expanding</td>
+<td>Allocate the pollution value to neighbors according to the edge weight</td>
+<td>Select an unexpanded node with the highest pollution for expanding</td>
 </tr>
 <tr>
 <td>APPR</td>
-<td>Use the local push procedure for extended neighbors</td>
+<td>Use the local push procedure for expanded neighbors</td>
 <td>Select a node with the highest residual for expanding</td>
 </tr>
 <tr>
-<td>TTR</td>
-<td>Use the TTR local push procedure for extended neighbors</td>
+<td>TTR family</td>
+<td>Use the TTR local push procedure for expanded neighbors</td>
 <td>Select a node with the highest residual for expanding</td>
 </tr>
 </tbody>
 </table>
-<p>💡 For more details, please refer to the paper: <a href="https://ieeexplore.ieee.org/abstract/document/10098630">TRacer: Scalable Graph-Based Transaction Tracing for Account-Based Blockchain Trading Systems</a>.</p>
+<p>Note: for more details, please refer to the paper: <a href="https://ieeexplore.ieee.org/abstract/document/10098630">TRacer: Scalable Graph-Based Transaction Tracing for Account-Based Blockchain Trading Systems</a>.</p>
+<h2 id="how-to-pass-strategy-parameters">How to pass strategy parameters</h2>
+<p>All strategy parameters are passed through spider arguments with <code>-a</code>.
+For example, if you use <code>BlockchainSpider.strategies.txs.BFS</code> with <code>depth=3</code>, the command is:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.BFS \
+-a depth=3
+</code></pre>
+<p>The same strategy arguments also work for <code>txs.tronscan</code> and <code>txs.blockchaininfo</code>.
+Only the spider-specific arguments such as <code>apikeys</code>, <code>endpoint</code>, <code>enable</code>, or time/block range are different.</p>
+<h2 id="strategy-parameters">Strategy parameters</h2>
+<h3 id="blockchainspiderstrategiestxsbfs"><code>BlockchainSpider.strategies.txs.BFS</code></h3>
+<p>Breadth-first expansion over both incoming and outgoing neighbors.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>depth</code></td>
+<td>int</td>
+<td><code>2</code></td>
+<td>Maximum expansion depth. <code>depth=1</code> means only direct neighbors of the source node are expanded.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.BFS \
+-a depth=2
+</code></pre>
+<h3 id="blockchainspiderstrategiestxspoison"><code>BlockchainSpider.strategies.txs.Poison</code></h3>
+<p>A simple taint propagation strategy.
+Unlike BFS, it only follows outgoing transfers from the current node.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>depth</code></td>
+<td>int</td>
+<td><code>2</code></td>
+<td>Maximum forward tracing depth. Only outgoing neighbors are added at each step.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.Poison \
+-a depth=3
+</code></pre>
+<h3 id="blockchainspiderstrategiestxshaircut"><code>BlockchainSpider.strategies.txs.Haircut</code></h3>
+<p>Taint analysis with value allocation.
+For each expanded node, the node weight is distributed to outgoing neighbors in proportion to transfer value.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min_weight</code></td>
+<td>float</td>
+<td><code>1e-3</code></td>
+<td>Minimum pollution weight required for a node to be expanded. The value must be between <code>0</code> and <code>1</code>. Smaller values usually produce larger subgraphs.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.Haircut \
+-a min_weight=0.005
+</code></pre>
+<h3 id="blockchainspiderstrategiestxsappr"><code>BlockchainSpider.strategies.txs.APPR</code></h3>
+<p>Approximate Personalized PageRank on the transaction subgraph.
+It maintains a rank vector <code>p</code> and a residual vector <code>r</code>, and always expands the node with the largest residual.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.15</code></td>
+<td>Probability mass retained on the current node when pushing residuals. The value must be between <code>0</code> and <code>1</code>. Larger values concentrate more score near the source node.</td>
+</tr>
+<tr>
+<td><code>epsilon</code></td>
+<td>float</td>
+<td><code>1e-5</code></td>
+<td>Residual threshold for stopping expansion. The value must be between <code>0</code> and <code>1</code>. Smaller values usually expand more nodes and cost more time.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.APPR \
+-a alpha=0.2 \
+-a epsilon=1e-6
+</code></pre>
+<h3 id="blockchainspiderstrategiestxsttrbase"><code>BlockchainSpider.strategies.txs.TTRBase</code></h3>
+<p>The basic Transaction Tracing Rank strategy.
+It splits residuals to outgoing and incoming neighbors by edge count.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.15</code></td>
+<td>Portion of residual converted into final score on the current node at each push.</td>
+</tr>
+<tr>
+<td><code>beta</code></td>
+<td>float</td>
+<td><code>0.8</code></td>
+<td>Portion of the remaining residual propagated to outgoing neighbors. The rest, <code>1 - beta</code>, is propagated to incoming neighbors.</td>
+</tr>
+<tr>
+<td><code>epsilon</code></td>
+<td>float</td>
+<td><code>1e-3</code></td>
+<td>Residual threshold for stopping expansion. Smaller values usually expand more nodes.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.TTRBase \
+-a alpha=0.15 \
+-a beta=0.8 \
+-a epsilon=1e-4
+</code></pre>
+<h3 id="blockchainspiderstrategiestxsttrweight"><code>BlockchainSpider.strategies.txs.TTRWeight</code></h3>
+<p>A value-weighted TTR variant.
+Compared with <code>TTRBase</code>, residuals are distributed according to transfer amount instead of edge count.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.15</code></td>
+<td>Portion of residual converted into final score on the current node at each push.</td>
+</tr>
+<tr>
+<td><code>beta</code></td>
+<td>float</td>
+<td><code>0.8</code></td>
+<td>Portion of the remaining residual propagated to outgoing neighbors. The rest is propagated to incoming neighbors.</td>
+</tr>
+<tr>
+<td><code>epsilon</code></td>
+<td>float</td>
+<td><code>1e-3</code></td>
+<td>Residual threshold for stopping expansion. Smaller values usually expand more nodes.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.TTRWeight \
+-a alpha=0.15 \
+-a beta=0.9 \
+-a epsilon=1e-4
+</code></pre>
+<h3 id="blockchainspiderstrategiestxsttrtime"><code>BlockchainSpider.strategies.txs.TTRTime</code></h3>
+<p>A time-aware TTR variant.
+Residuals are propagated according to transaction time order, which is useful when you care about temporal consistency.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.15</code></td>
+<td>Portion of residual converted into final score on the current node at each push.</td>
+</tr>
+<tr>
+<td><code>beta</code></td>
+<td>float</td>
+<td><code>0.8</code></td>
+<td>Portion of the remaining residual propagated to later outgoing transfers. The rest is propagated to earlier incoming transfers.</td>
+</tr>
+<tr>
+<td><code>epsilon</code></td>
+<td>float</td>
+<td><code>1e-3</code></td>
+<td>Residual threshold for stopping expansion. Smaller values usually expand more nodes.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.TTRTime \
+-a alpha=0.15 \
+-a beta=0.8 \
+-a epsilon=1e-4
+</code></pre>
+<h3 id="blockchainspiderstrategiestxsttrredirect"><code>BlockchainSpider.strategies.txs.TTRRedirect</code></h3>
+<p>A redirect-aware TTR variant.
+It aggregates transfers with the same transaction hash and keeps token symbols during propagation, which makes it more suitable for mixed-token fund flow analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.15</code></td>
+<td>Portion of residual converted into final score on the current node at each push.</td>
+</tr>
+<tr>
+<td><code>beta</code></td>
+<td>float</td>
+<td><code>0.8</code></td>
+<td>Portion of the remaining residual propagated to outgoing transfers. The rest is propagated to incoming transfers.</td>
+</tr>
+<tr>
+<td><code>epsilon</code></td>
+<td>float</td>
+<td><code>1e-3</code></td>
+<td>Residual threshold for stopping expansion. It is also used internally to stop overly fine-grained redirect splitting.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
+-a source=0xYourSourceAddress \
+-a apikeys=YourApiKey1,YourApiKey2 \
+-a strategy=BlockchainSpider.strategies.txs.TTRRedirect \
+-a alpha=0.15 \
+-a beta=0.8 \
+-a epsilon=1e-4 \
+-a enable=BlockchainSpider.middlewares.txs.blockscan.ExternalTransferMiddleware,BlockchainSpider.middlewares.txs.blockscan.Token20TransferMiddleware
+</code></pre>
+<h2 id="parameter-selection-suggestions">Parameter selection suggestions</h2>
+<ul>
+<li>Use <strong><code>BFS</code></strong> when you need a simple baseline and a controllable hop limit.</li>
+<li>Use <strong><code>Poison</code></strong> when you mainly care about forward fund flow from the source node.</li>
+<li>Use <strong><code>Haircut</code></strong> when you want taint dilution by transfer amount.</li>
+<li>Use <strong><code>APPR</code></strong> when you need a ranking-oriented strategy that concentrates score near the source node.</li>
+<li>Use <strong><code>TTRBase</code></strong> or <strong><code>TTRWeight</code></strong> when you need bidirectional tracing with residual ranking.</li>
+<li>Use <strong><code>TTRTime</code></strong> when transaction order matters.</li>
+<li>Use <strong><code>TTRRedirect</code></strong> when token type and intra-transaction redirect behavior matter.</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li><code>BFS</code> and <code>Poison</code> mainly use <code>depth</code> to control expansion size.</li>
+<li><code>Haircut</code> mainly uses <code>min_weight</code> to control expansion size.</li>
+<li><code>APPR</code> and the <code>TTR</code> family mainly use <code>epsilon</code> to control expansion size.</li>
+<li>Smaller <code>epsilon</code> or <code>min_weight</code> usually leads to more nodes being expanded and higher runtime.</li>
+<li>On account-based chains, strategies consume normalized transfer edges with fields such as <code>from</code>, <code>to</code>, <code>value</code>, <code>timeStamp</code>, and <code>symbol</code>.</li>
+<li><code>TTRRedirect</code> can automatically handle different token types during propagation, so in practice it may collect token transfers beyond a strict <code>allowed_tokens</code> filter.</li>
+</ul>
 <h2 id="customise-your-own-strategy">Customise your own strategy</h2>
 <p>You can implement your own strategy by inheriting the <code>BlockchainSpider.strategies.txs.PushPopModel</code> class.
-Here's the simplest example, in which for each Ethereum address, we track only the output money transfer with the largest Ether value.</p>
-<p><strong>First</strong>, we create a new file <code>mystg.py</code> in the root directory of the project and declare a PushPopModel class:</p>
+Here is the simplest example, in which for each Ethereum address, we track only the output money transfer with the
+largest Ether value.</p>
+<p><strong>First</strong>, create a new file <code>mystg.py</code> in the root directory of the project and declare a <code>PushPopModel</code> class:</p>
 <pre><code class="language-python">from typing import Any, Dict, Tuple
 from BlockchainSpider.strategies.txs import PushPopModel
+
 
 class MyStrategy(PushPopModel):
     def __init__(self, source, **kwargs):
@@ -199,21 +548,21 @@ class MyStrategy(PushPopModel):
     def push(self, node, edges: list, **kwargs):
         # node is the address of the current node
         # edges is a list of money transfers related to the current address
-        # each edge is a dict with fields as TransferItem, e.g., `AccountTransferItem`,
-        # please refer to the fields at `BlockchainSpider/items/subgraph.py`
+        # each edge is a dict with fields adapted from TransferItem, e.g. `AccountTransferItem`
+        # please refer to `BlockchainSpider/items/subgraph.py`
         edges = [edge for edge in edges if edge['address_from'] == node]
         if len(edges) == 0:
-            return 
+            return
         edges.sort(key=lambda x: int(x['value']), reverse=True)
-        self.to_be_vis.add(edges[0]['address_to']) 
+        self.to_be_vis.add(edges[0]['address_to'])
 
     def pop(self) -&gt; Tuple[Any, Dict]:
         if len(self.to_be_vis) == 0:
             return None, {}
         node = self.to_be_vis.pop()
 
-        # the returned dictionary will be used as the kwargs for the next push
-        # we don't need to pass the context, so we return the empty dictionary
+        # the returned dictionary will be used as kwargs for the next push
+        # we do not need to pass context here, so return an empty dict
         return node, {}
 
     def get_context_snapshot(self) -&gt; Dict:
@@ -222,8 +571,8 @@ class MyStrategy(PushPopModel):
     def get_node_rank(self) -&gt; Dict:
         return {}
 </code></pre>
-<p><strong>Next</strong>, you can start the <code>txs.blockscan</code> spider and mount the new strategy:</p>
-<pre><code class="language-shell">scrapy crawl txs.blockscan \ 
+<p><strong>Next</strong>, start the <code>txs.blockscan</code> spider and mount the new strategy:</p>
+<pre><code class="language-shell">scrapy crawl txs.blockscan \
 -a source=0xYourSourceAddress \
 -a apikeys=YourApiKey1,YourApiKey2 \
 -a strategy=mystg.MyStrategy
