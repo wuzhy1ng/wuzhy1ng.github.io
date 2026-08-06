@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UniTracer 是一款 AI 驱动的区块链资金追踪桌面工作台，将链上交易、智能体分析与可交互关系图整合在一个本地调查空间中。" />
+  <meta name="theme-color" content="#071019" />
+  <title>UniTracer｜AI 区块链资金追踪工作台</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJzdXJmYWNlIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEwMWQyYSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNjBhMTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImFjY2VudCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNGQxYWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzZkN2ZmIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5MjgiIGhlaWdodD0iOTI4IiByeD0iMjMyIiBmaWxsPSJ1cmwoI3N1cmZhY2UpIi8+CiAgPHJlY3QgeD0iNzAiIHk9IjcwIiB3aWR0aD0iODg0IiBoZWlnaHQ9Ijg4NCIgcng9IjIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjYzODRhIiBzdHJva2Utd2lkdGg9IjIwIi8+CiAgPHBhdGggZD0iTTE4NiAyNDYgMzEwIDE3NiA0MjQgMjM0TTgzNCA3NzggNzE0IDg1MCA1OTggNzkwIiBmaWxsPSJub25lIiBzdHJva2U9IiMyYTc2NmMiIHN0cm9rZS13aWR0aD0iMTgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjE3NiIgY3k9IjI1MiIgcj0iMzYiIGZpbGw9IiMzNGQxYWQiLz4KICA8Y2lyY2xlIGN4PSIzMTQiIGN5PSIxNzQiIHI9IjI1IiBmaWxsPSIjNzZkN2ZmIi8+CiAgPGNpcmNsZSBjeD0iNDMyIiBjeT0iMjM4IiByPSIxOCIgZmlsbD0iI2Y0Yjg2MCIvPgogIDxjaXJjbGUgY3g9Ijg0MiIgY3k9Ijc3MiIgcj0iMzYiIGZpbGw9IiM3NmQ3ZmYiLz4KICA8Y2lyY2xlIGN4PSI3MDgiIGN5PSI4NTIiIHI9IjI1IiBmaWxsPSIjMzRkMWFkIi8+CiAgPGNpcmNsZSBjeD0iNTkwIiBjeT0iNzg2IiByPSIxOCIgZmlsbD0iI2Y0Yjg2MCIvPgogIDxwYXRoIGQ9Ik0yNzYgMzMwdjI0NmMwIDExMiA2MCAxNjYgMTU4IDE2NnMxNTgtNTQgMTU4LTE2NlYzMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNhY2NlbnQpIiBzdHJva2Utd2lkdGg9IjY4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNTU4IDMzMGgyNDRNNjgwIDMzMHY0MTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzc2ZDdmZiIgc3Ryb2tlLXdpZHRoPSI2OCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=" type="image/svg+xml" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #060b11;
+      --bg-soft: #09111a;
+      --surface: #0c151f;
+      --surface-2: #111d29;
+      --line: #1b2a39;
+      --line-bright: #29465a;
+      --text: #edf5f7;
+      --muted: #8c9eac;
+      --faint: #596c7c;
+      --teal: #38d6b0;
+      --cyan: #78d9ff;
+      --amber: #f4b861;
+      --red: #ff7882;
+      --shadow: 0 30px 90px rgba(0, 0, 0, .42);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 76% 5%, rgba(31, 117, 108, .17), transparent 29rem),
+        radial-gradient(circle at 16% 38%, rgba(33, 103, 130, .1), transparent 34rem),
+        var(--bg);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .28;
+      background-image:
+        linear-gradient(rgba(86, 125, 143, .055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 125, 143, .055) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid rgba(40, 63, 78, .72);
+      background: rgba(6, 11, 17, .78);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      min-height: 68px;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand-mark {
+      position: relative;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      font: 800 11px var(--mono);
+      letter-spacing: -.04em;
+      box-shadow: inset 0 0 18px rgba(56, 214, 176, .06);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--bg);
+      border-color: var(--teal);
+    }
+
+    .brand-mark::before { top: -1px; left: -1px; border-right: 1px solid; border-bottom: 1px solid; }
+    .brand-mark::after { right: -1px; bottom: -1px; border-top: 1px solid; border-left: 1px solid; }
+    .brand-copy { display: flex; flex-direction: column; gap: 2px; }
+    .brand-copy strong { font-size: 14px; letter-spacing: .03em; }
+    .brand-copy span { color: var(--faint); font: 7px var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+    .nav-links > a { color: #99a9b6; font-size: 12px; transition: color .2s; }
+    .nav-links > a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 36px;
+      padding: 0 14px;
+      border: 1px solid rgba(56, 214, 176, .48);
+      color: #b9f6e8 !important;
+      background: rgba(56, 214, 176, .08);
+      font-weight: 650;
+    }
+    .nav-cta::after { content: "↗"; color: var(--teal); }
+
+    .hero { padding: 92px 0 64px; }
+    .hero-copy { width: min(840px, 100%); margin: 0 auto; text-align: center; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      color: #84e8d0;
+      font: 700 9px var(--mono);
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--teal); box-shadow: 0 0 12px var(--teal); }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 6.2vw, 78px);
+      line-height: 1.06;
+      letter-spacing: -.065em;
+      font-weight: 760;
+    }
+    h1 span { color: transparent; background: linear-gradient(100deg, var(--teal), #b7f2e5 52%, var(--cyan)); background-clip: text; }
+    .hero-copy > p {
+      width: min(700px, 94%);
+      margin: 25px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .hero-actions { display: flex; justify-content: center; gap: 11px; margin-top: 32px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 19px;
+      border: 1px solid var(--line-bright);
+      color: #c8d4dc;
+      background: rgba(12, 21, 31, .85);
+      font-size: 12px;
+      font-weight: 650;
+      transition: transform .18s, border-color .18s, background .18s;
+    }
+    .button:hover { transform: translateY(-2px); border-color: #477184; background: #101d28; }
+    .button.primary { border-color: var(--teal); color: #04100d; background: var(--teal); }
+    .button.primary:hover { background: #5de1c1; }
+    .button .arrow { font: 700 15px var(--mono); }
+
+    .hero-platforms { display: flex; justify-content: center; gap: 22px; margin-top: 22px; color: #687b89; font: 9px var(--mono); }
+    .hero-platforms span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-platforms i { width: 4px; height: 4px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+    .product-stage { position: relative; width: min(1120px, 100%); margin: 62px auto 0; }
+    .product-stage::before {
+      content: "";
+      position: absolute;
+      inset: -45px 9% -50px;
+      z-index: -1;
+      background: radial-gradient(ellipse, rgba(56, 214, 176, .15), transparent 67%);
+      filter: blur(18px);
+    }
+
+    .product-window {
+      overflow: hidden;
+      border: 1px solid #263a49;
+      background: #081019;
+      box-shadow: var(--shadow), 0 0 0 1px rgba(119, 217, 255, .025) inset;
+    }
+    .window-bar { display: flex; align-items: center; height: 38px; padding: 0 14px; border-bottom: 1px solid #1b2b38; background: #0c151e; }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { width: 7px; height: 7px; border-radius: 50%; background: #30404d; }
+    .window-dots i:first-child { background: #db6b72; }
+    .window-dots i:nth-child(2) { background: #d9a854; }
+    .window-dots i:nth-child(3) { background: #4db89f; }
+    .window-title { margin: auto; color: #617584; font: 8px var(--mono); letter-spacing: .11em; }
+    .window-live { display: flex; align-items: center; gap: 7px; color: #7ea698; font: 7px var(--mono); }
+    .window-live i { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 9px var(--teal); animation: pulse 1.7s infinite alternate; }
+
+    .app-preview { display: grid; grid-template-columns: 182px minmax(0, 1fr) 248px; height: 550px; }
+    .preview-sidebar { padding: 14px 12px; border-right: 1px solid #1a2a36; background: linear-gradient(180deg, #0b141d, #081019); }
+    .preview-brand { display: flex; align-items: center; gap: 9px; padding: 2px 2px 16px; border-bottom: 1px solid #192732; color: #d4e1e7; font-size: 10px; font-weight: 700; }
+    .mini-mark { display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid var(--teal); color: var(--teal); font: 700 8px var(--mono); }
+    .new-case { margin-top: 13px; padding: 10px; border: 1px solid rgba(56, 214, 176, .32); color: #99e6d3; background: rgba(56, 214, 176, .07); font-size: 8px; text-align: center; }
+    .preview-label { margin: 18px 2px 8px; color: #526776; font: 7px var(--mono); letter-spacing: .13em; }
+    .case-row { display: grid; grid-template-columns: 7px minmax(0, 1fr); gap: 8px; margin-bottom: 5px; padding: 10px 8px; border: 1px solid transparent; }
+    .case-row.active { border-color: #284457; background: #101d28; }
+    .case-dot { width: 6px; height: 6px; margin-top: 2px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 7px rgba(56, 214, 176, .7); }
+    .case-row:nth-of-type(4) .case-dot { background: var(--amber); box-shadow: none; }
+    .case-row strong { display: block; overflow: hidden; color: #aebec8; font-size: 7px; text-overflow: ellipsis; white-space: nowrap; }
+    .case-row small { display: block; margin-top: 5px; color: #526574; font: 6px var(--mono); }
+
+    .preview-main { position: relative; min-width: 0; overflow: hidden; background: #09111a; }
+    .graph-head { display: flex; align-items: center; height: 45px; padding: 0 13px; border-bottom: 1px solid #1b2a36; background: #0d161f; }
+    .graph-head strong { font-size: 9px; }
+    .layout-pill { margin-left: auto; padding: 6px 8px; border: 1px solid #2a3e4e; color: #8093a0; font: 6px var(--mono); }
+    .graph-area {
+      position: absolute;
+      inset: 45px 0 0;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(48, 73, 88, .14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48, 73, 88, .14) 1px, transparent 1px),
+        radial-gradient(circle at 48% 45%, rgba(31, 89, 88, .17), transparent 55%);
+      background-size: 30px 30px, 30px 30px, auto;
+    }
+    .edge { position: absolute; z-index: 1; height: 1px; transform-origin: left center; background: linear-gradient(90deg, rgba(120, 217, 255, .28), rgba(56, 214, 176, .66)); }
+    .edge::after { content: ""; position: absolute; right: 0; top: -2px; border-width: 2.5px 0 2.5px 5px; border-style: solid; border-color: transparent transparent transparent var(--teal); }
+    .edge.dashed { background: repeating-linear-gradient(90deg, rgba(120, 217, 255, .65) 0 5px, transparent 5px 9px); }
+    .edge.amber { background: linear-gradient(90deg, rgba(244, 184, 97, .3), rgba(244, 184, 97, .75)); }
+    .edge.amber::after { border-left-color: var(--amber); }
+    .node { position: absolute; z-index: 3; display: grid; width: 16px; height: 16px; place-items: center; border: 1px solid #6d8495; border-radius: 50%; background: #121f2b; box-shadow: 0 0 0 5px rgba(75, 96, 111, .08); }
+    .node::after { content: attr(data-label); position: absolute; left: 20px; width: max-content; color: #8499a8; font: 6px var(--mono); }
+    .node.source { width: 20px; height: 20px; border-color: var(--cyan); background: #153241; box-shadow: 0 0 0 6px rgba(120, 217, 255, .09), 0 0 16px rgba(120, 217, 255, .24); }
+    .node.source::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); }
+    .node.contract { border-radius: 2px; border-color: var(--amber); background: #352a1b; }
+    .node.labeled { border-color: var(--teal); background: #173229; }
+    .n1 { left: 16%; top: 32%; }
+    .n2 { left: 41%; top: 42%; }
+    .n3 { left: 66%; top: 24%; }
+    .n4 { left: 69%; top: 59%; }
+    .n5 { left: 23%; top: 68%; }
+    .n6 { left: 81%; top: 39%; }
+    .n7 { left: 83%; top: 61%; }
+    .n8 { left: 41%; top: 72%; }
+    .n9 { left: 9%; top: 72%; }
+    .selected-ring { position: absolute; z-index: 2; left: calc(41% - 10px); top: calc(42% - 10px); width: 36px; height: 36px; border: 1px dashed rgba(56, 214, 176, .55); border-radius: 50%; animation: rotate 12s linear infinite; }
+
+    .graph-legend { position: absolute; bottom: 14px; left: 14px; z-index: 4; display: flex; gap: 13px; padding: 8px 10px; border: 1px solid rgba(39, 60, 74, .8); background: rgba(8, 15, 23, .84); color: #6d818f; font: 6px var(--mono); backdrop-filter: blur(6px); }
+    .graph-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 5px; height: 5px; border-radius: 50%; background: #7890a0; }
+    .legend-dot.source { background: var(--cyan); }
+    .legend-dot.contract { border-radius: 0; background: var(--amber); }
+
+    .preview-assistant { display: flex; min-width: 0; flex-direction: column; border-left: 1px solid #1a2a36; background: #0b141d; }
+    .assistant-head { padding: 13px; border-bottom: 1px solid #1d2b37; }
+    .assistant-head span { color: var(--teal); font: 6px var(--mono); letter-spacing: .12em; }
+    .assistant-head strong { display: block; margin-top: 5px; font-size: 9px; }
+    .assistant-feed { display: flex; flex: 1; flex-direction: column; gap: 9px; padding: 12px; }
+    .event { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; padding: 8px; border: 1px solid #1d303d; background: #0e1923; }
+    .event-icon { display: grid; width: 18px; height: 18px; place-items: center; border: 1px solid #2d665c; color: var(--teal); font: 6px var(--mono); }
+    .event strong { display: block; color: #9db0bd; font-size: 7px; }
+    .event p { margin: 4px 0 0; color: #5f7484; font-size: 6px; line-height: 1.5; }
+    .chat-bubble { align-self: flex-end; max-width: 86%; padding: 8px 9px; border: 1px solid rgba(120, 217, 255, .24); background: rgba(120, 217, 255, .055); color: #9fb1bc; font-size: 7px; line-height: 1.55; }
+    .answer { max-width: 92%; padding: 9px; border-left: 2px solid var(--teal); background: #0e1a22; color: #879ca9; font-size: 7px; line-height: 1.6; }
+    .composer { display: flex; align-items: center; height: 40px; margin: 0 11px 11px; padding: 0 9px; border: 1px solid #29404f; color: #556b7a; font-size: 7px; }
+    .composer span { margin-left: auto; color: var(--teal); font-size: 11px; }
+
+    .trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 20px; border: 1px solid var(--line); background: rgba(9, 17, 26, .76); }
+    .trust-item { min-height: 88px; padding: 18px 20px; border-right: 1px solid var(--line); }
+    .trust-item:last-child { border-right: 0; }
+    .trust-item strong { display: block; color: #d9e6e9; font-size: 14px; }
+    .trust-item span { display: block; margin-top: 7px; color: var(--faint); font-size: 9px; line-height: 1.5; }
+
+    .section { padding: 104px 0; }
+    .section-kicker { color: var(--teal); font: 700 8px var(--mono); letter-spacing: .18em; text-transform: uppercase; }
+    .section-heading { display: grid; grid-template-columns: minmax(0, .85fr) minmax(360px, .55fr); gap: 90px; align-items: end; margin-top: 13px; }
+    .section-heading h2 { margin: 0; font-size: clamp(31px, 4vw, 48px); line-height: 1.18; letter-spacing: -.045em; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 52px; border: 1px solid var(--line); background: var(--line); }
+    .feature-card { position: relative; min-height: 260px; padding: 27px; overflow: hidden; background: rgba(10, 18, 27, .96); transition: background .2s; }
+    .feature-card:hover { background: #0e1a24; }
+    .feature-card::after { content: ""; position: absolute; right: -50px; bottom: -80px; width: 170px; height: 170px; border: 1px solid rgba(56, 214, 176, .08); border-radius: 50%; box-shadow: 0 0 0 28px rgba(56, 214, 176, .025); }
+    .feature-index { color: #536b78; font: 8px var(--mono); }
+    .feature-icon { display: grid; width: 38px; height: 38px; place-items: center; margin: 32px 0 21px; border: 1px solid #315669; color: var(--cyan); background: rgba(120, 217, 255, .04); font: 800 9px var(--mono); }
+    .feature-card:nth-child(2n) .feature-icon { border-color: #30675b; color: var(--teal); background: rgba(56, 214, 176, .04); }
+    .feature-card:nth-child(3n) .feature-icon { border-color: #6c5732; color: var(--amber); background: rgba(244, 184, 97, .04); }
+    .feature-card h3 { margin: 0; font-size: 16px; }
+    .feature-card p { margin: 12px 0 0; color: #788c9a; font-size: 11px; line-height: 1.75; }
+
+    .workflow-wrap { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(8, 15, 23, .58); }
+    .workflow { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; align-items: start; }
+    .workflow-intro { position: sticky; top: 116px; }
+    .workflow-intro h2 { margin: 15px 0 18px; font-size: clamp(32px, 4vw, 48px); line-height: 1.2; letter-spacing: -.05em; }
+    .workflow-intro p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .workflow-intro .button { margin-top: 13px; }
+
+    .steps { border-left: 1px solid #213342; }
+    .step { position: relative; display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 17px; min-height: 165px; padding: 5px 0 38px 29px; }
+    .step:last-child { min-height: auto; padding-bottom: 0; }
+    .step::before { content: ""; position: absolute; top: 5px; left: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 5px rgba(56, 214, 176, .08), 0 0 11px rgba(56, 214, 176, .5); }
+    .step-no { color: #4f6977; font: 700 10px var(--mono); }
+    .step-copy h3 { margin: 0; font-size: 18px; }
+    .step-copy p { margin: 10px 0 0; color: #788c9a; font-size: 11px; line-height: 1.8; }
+    .step-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+    .step-tags span { padding: 5px 7px; border: 1px solid #263b4b; color: #6e8492; font: 7px var(--mono); }
+
+    .local-card { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; min-height: 480px; overflow: hidden; border: 1px solid #284052; background: linear-gradient(135deg, #0d1922, #081018 70%); box-shadow: var(--shadow); }
+    .local-copy { padding: 62px; }
+    .local-copy h2 { margin: 16px 0 19px; font-size: clamp(32px, 4vw, 49px); line-height: 1.15; letter-spacing: -.05em; }
+    .local-copy > p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; margin-top: 30px; }
+    .check-list span { display: flex; align-items: center; gap: 9px; color: #a6b6c0; font-size: 10px; }
+    .check-list i { display: grid; width: 18px; height: 18px; place-items: center; border: 1px solid #2f6259; color: var(--teal); font: 8px var(--mono); }
+
+    .local-visual { position: relative; display: grid; place-items: center; overflow: hidden; border-left: 1px solid #213746; background: radial-gradient(circle, rgba(56, 214, 176, .13), transparent 56%); }
+    .orbit { position: absolute; border: 1px solid rgba(84, 126, 141, .19); border-radius: 50%; }
+    .orbit.one { width: 320px; height: 320px; animation: rotate 26s linear infinite; }
+    .orbit.two { width: 230px; height: 230px; border-style: dashed; animation: rotate 19s linear infinite reverse; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .orbit::before { top: 12%; left: 16%; }
+    .orbit::after { right: 8%; bottom: 25%; background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .vault { position: relative; z-index: 3; display: grid; width: 128px; height: 128px; place-items: center; border: 1px solid var(--teal); background: rgba(8, 20, 24, .88); box-shadow: 0 0 60px rgba(56, 214, 176, .13), inset 0 0 35px rgba(56, 214, 176, .08); }
+    .vault::before { content: ""; position: absolute; inset: 12px; border: 1px dashed rgba(56, 214, 176, .26); }
+    .vault strong { color: var(--teal); font: 800 17px var(--mono); }
+    .vault span { position: absolute; top: calc(100% + 16px); width: 190px; color: #627b87; font: 7px var(--mono); text-align: center; letter-spacing: .13em; }
+
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 45px; }
+    .audience-card { padding: 28px; border: 1px solid var(--line); background: rgba(10, 18, 27, .76); }
+    .audience-card span { color: var(--teal); font: 700 8px var(--mono); letter-spacing: .12em; }
+    .audience-card h3 { margin: 18px 0 11px; font-size: 18px; }
+    .audience-card p { margin: 0; color: #788b98; font-size: 11px; line-height: 1.8; }
+
+    .final-cta { padding: 72px 0 112px; }
+    .cta-box { position: relative; overflow: hidden; padding: 78px 28px; border: 1px solid #2c574f; background: linear-gradient(130deg, rgba(22, 61, 56, .55), rgba(7, 15, 22, .94) 64%); text-align: center; }
+    .cta-box::before, .cta-box::after { content: ""; position: absolute; width: 260px; height: 260px; border: 1px solid rgba(56, 214, 176, .11); border-radius: 50%; }
+    .cta-box::before { top: -160px; left: -70px; box-shadow: 0 0 0 45px rgba(56, 214, 176, .025); }
+    .cta-box::after { right: -100px; bottom: -190px; box-shadow: 0 0 0 62px rgba(120, 217, 255, .018); }
+    .cta-box h2 { position: relative; margin: 0; font-size: clamp(32px, 4.8vw, 58px); letter-spacing: -.055em; }
+    .cta-box p { position: relative; width: min(600px, 90%); margin: 18px auto 28px; color: #8da29f; font-size: 13px; line-height: 1.8; }
+    .cta-box .hero-actions { position: relative; margin-top: 0; }
+
+    .site-footer { border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; min-height: 92px; }
+    .footer-inner p { margin: 0 0 0 auto; color: #536675; font: 8px var(--mono); }
+    .footer-links { display: flex; gap: 20px; margin-left: 35px; }
+    .footer-links a { color: #697d8b; font-size: 9px; }
+    .footer-links a:hover { color: var(--teal); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes pulse { from { opacity: .4; } to { opacity: 1; } }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+
+    @media (max-width: 980px) {
+      .hero { padding-top: 72px; }
+      .app-preview { grid-template-columns: 148px minmax(0, 1fr); height: 500px; }
+      .preview-assistant { display: none; }
+      .section-heading { grid-template-columns: 1fr; gap: 20px; }
+      .section-heading p { max-width: 620px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .workflow { grid-template-columns: 1fr; gap: 55px; }
+      .workflow-intro { position: static; max-width: 680px; }
+      .local-card { grid-template-columns: 1fr; }
+      .local-visual { min-height: 380px; border-top: 1px solid #213746; border-left: 0; }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); }
+      .trust-item:nth-child(2) { border-right: 0; }
+      .trust-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+
+    @media (max-width: 720px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .nav { min-height: 62px; }
+      .nav-links > a:not(.nav-cta) { display: none; }
+      .nav-cta { min-height: 34px; padding: 0 11px; font-size: 10px; }
+      .hero { padding: 60px 0 42px; }
+      h1 { font-size: clamp(39px, 12.5vw, 60px); }
+      .hero-copy > p { width: 100%; font-size: 13px; line-height: 1.8; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-platforms { flex-wrap: wrap; gap: 10px 17px; }
+      .product-stage { margin-top: 45px; }
+      .window-live { display: none; }
+      .app-preview { grid-template-columns: 1fr; height: 430px; }
+      .preview-sidebar { display: none; }
+      .graph-area { min-height: 385px; }
+      .trust-strip { grid-template-columns: 1fr; }
+      .trust-item { min-height: 75px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .trust-item:last-child { border-bottom: 0; }
+      .section { padding: 78px 0; }
+      .section-heading { grid-template-columns: 1fr; }
+      .section-heading h2 { font-size: 34px; }
+      .feature-grid { grid-template-columns: 1fr; margin-top: 36px; }
+      .feature-card { min-height: 235px; }
+      .workflow { gap: 44px; }
+      .step { grid-template-columns: 42px minmax(0, 1fr); padding-left: 21px; }
+      .local-copy { padding: 38px 25px; }
+      .check-list { grid-template-columns: 1fr; }
+      .local-visual { min-height: 320px; }
+      .orbit.one { width: 260px; height: 260px; }
+      .orbit.two { width: 190px; height: 190px; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 58px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 19px; padding: 26px 0; }
+      .footer-inner p { margin: 0; }
+      .footer-links { margin: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="UniTracer 首页">
+        <span class="brand-mark">UT</span>
+        <span class="brand-copy"><strong>UniTracer</strong><span>Desktop Investigator</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">产品能力</a>
+        <a href="#workflow">调查流程</a>
+        <a href="#local">本地工作台</a>
+        <a class="nav-cta" href="https://soft-disk-6b29.wuzhiying65.workers.dev/login">获取 Token APIKey</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">AI-assisted blockchain investigation</div>
+          <h1>让每一笔资金流向<br /><span>都有迹可循</span></h1>
+          <p>UniTracer 将链上交易数据、AI 智能体分析与可交互资金关系图整合到一个桌面工作台。无需在脚本、表格与报告之间反复切换，让复杂案件从线索到结论保持完整上下文。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://soft-disk-6b29.wuzhiying65.workers.dev/release/UniTracer-0.1.0-win-x64.zip">下载 Windows Demo <span class="arrow">↓</span></a>
+            <a class="button" href="#features">查看核心能力 <span class="arrow">→</span></a>
+          </div>
+          <div class="hero-platforms">
+            <span><i></i>Windows</span><span><i></i>macOS</span><span><i></i>Linux</span><span><i></i>本地数据存储</span>
+          </div>
+        </div>
+
+        <div class="product-stage reveal" aria-label="UniTracer 产品界面预览">
+          <div class="product-window">
+            <div class="window-bar">
+              <span class="window-dots"><i></i><i></i><i></i></span>
+              <span class="window-title">UNITRACER · CASE WORKSPACE</span>
+              <span class="window-live"><i></i>AGENT RUNNING</span>
+            </div>
+            <div class="app-preview">
+              <aside class="preview-sidebar">
+                <div class="preview-brand"><span class="mini-mark">UT</span> UniTracer</div>
+                <div class="new-case">＋ 新建追踪会话</div>
+                <div class="preview-label">追踪会话 / 03</div>
+                <div class="case-row active"><i class="case-dot"></i><div><strong>跨链资金转移调查</strong><small>ETH · 运行中</small></div></div>
+                <div class="case-row"><i class="case-dot"></i><div><strong>可疑归集地址分析</strong><small>TRON · 已完成</small></div></div>
+                <div class="case-row"><i class="case-dot"></i><div><strong>交易所流入追踪</strong><small>ETH · 已中断</small></div></div>
+              </aside>
+
+              <section class="preview-main">
+                <div class="graph-head"><strong>资金流关系图</strong><span class="layout-pill">FORCEATLAS2⌄</span></div>
+                <div class="graph-area">
+                  <i class="edge" data-from="n1" data-to="n2"></i>
+                  <i class="edge dashed" data-from="n2" data-to="n3"></i>
+                  <i class="edge amber" data-from="n2" data-to="n4"></i>
+                  <i class="edge" data-from="n5" data-to="n2"></i>
+                  <i class="edge amber" data-from="n3" data-to="n6"></i>
+                  <i class="edge" data-from="n4" data-to="n7"></i>
+                  <i class="edge dashed" data-from="n1" data-to="n5"></i>
+                  <i class="edge" data-from="n2" data-to="n8"></i>
+                  <i class="node source n1" data-node="n1" data-label="SOURCE"></i>
+                  <i class="node labeled n2" data-node="n2" data-label="0x71A...9C2"></i>
+                  <i class="node contract n3" data-node="n3" data-label="DEX Router"></i>
+                  <i class="node n4" data-node="n4" data-label=""></i>
+                  <i class="node labeled n5" data-node="n5" data-label="Hot Wallet"></i>
+                  <i class="node contract n6" data-node="n6" data-label=""></i>
+                  <i class="node n7" data-node="n7" data-label=""></i>
+                  <i class="node n8" data-node="n8" data-label=""></i>
+                  <i class="node n9" data-node="n9" data-label=""></i>
+                  <i class="selected-ring"></i>
+                  <div class="graph-legend"><span><i class="legend-dot source"></i>源地址</span><span><i class="legend-dot"></i>地址</span><span><i class="legend-dot contract"></i>合约</span></div>
+                </div>
+              </section>
+
+              <aside class="preview-assistant">
+                <div class="assistant-head"><span>CASE ASSISTANT</span><strong>AI 案件问答助手</strong></div>
+                <div class="assistant-feed">
+                  <div class="event"><span class="event-icon">N</span><div><strong>地址分析完成</strong><p>0x71A...9C2 已完成节点研判，发现 3 个后续地址。</p></div></div>
+                  <div class="event"><span class="event-icon">S</span><div><strong>阶段性报告已更新</strong><p>已归纳资金分散与再次归集路径。</p></div></div>
+                  <div class="chat-bubble">这笔资金最终流向了哪里？</div>
+                  <div class="answer">当前证据显示，主要资金经过 DEX 合约后分散至 4 个地址，其中两条路径再次汇入同一热钱包。</div>
+                </div>
+                <div class="composer">继续询问这个案件… <span>↗</span></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-strip reveal">
+          <div class="trust-item"><strong>实时追踪</strong><span>持续读取检查点，图谱与 Agent 进度同步更新</span></div>
+          <div class="trust-item"><strong>多会话管理</strong><span>并行管理案件，随时切换、恢复与重放</span></div>
+          <div class="trust-item"><strong>本地优先</strong><span>案件数据保存在用户指定的本机目录</span></div>
+          <div class="trust-item"><strong>离线分享</strong><span>导出自包含 HTML，断网环境也能交互查看</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <span class="section-kicker">What UniTracer does</span>
+        <div class="section-heading reveal">
+          <h2>从模糊线索到清晰证据，<br />在同一个工作台完成</h2>
+          <p>每个功能都围绕实际调查过程设计：先理解案件材料，再自动追踪资金路径，最后沉淀为可检查、可解释、可分享的调查结果。</p>
+        </div>
+        <div class="feature-grid reveal">
+          <article class="feature-card"><span class="feature-index">01 / INTAKE</span><div class="feature-icon">AI</div><h3>AI 协助立案</h3><p>上传 PDF、Excel、CSV 等案件材料。Agent 通过对话梳理诉求、识别地址与链，自动生成可编辑的追踪计划。</p></article>
+          <article class="feature-card"><span class="feature-index">02 / TRACE</span><div class="feature-icon">TX</div><h3>多链资金追踪</h3><p>从一个或多个地址出发，结合链上交易数据与 Node Agent 判断，持续扩展值得调查的下一跳。</p></article>
+          <article class="feature-card"><span class="feature-index">03 / GRAPH</span><div class="feature-icon">G</div><h3>可交互关系图</h3><p>以 ForceAtlas2、层级、环形、时间线等布局观察资金网络，支持缩放、平移、节点拖拽与条件过滤。</p></article>
+          <article class="feature-card"><span class="feature-index">04 / EVIDENCE</span><div class="feature-icon">DB</div><h3>交易证据下钻</h3><p>点击任意地址即可查看标签、决策来源与完整转账表，支持资产筛选、排序、分页及哈希复制。</p></article>
+          <article class="feature-card"><span class="feature-index">05 / ASSISTANT</span><div class="feature-icon">Q</div><h3>AI 案件问答助手</h3><p>系统动态与用户问答汇入同一时间线。助手复用案件上下文，帮助解释路径、比较节点并归纳阶段发现。</p></article>
+          <article class="feature-card"><span class="feature-index">06 / SHARE</span><div class="feature-icon">↗</div><h3>静态案件导出</h3><p>把图谱、重放、报告、活动记录和转账数据导出为单个 HTML 文件，方便在离线主机上安全分享。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section workflow-wrap" id="workflow">
+      <div class="container workflow">
+        <div class="workflow-intro reveal">
+          <span class="section-kicker">Investigation workflow</span>
+          <h2>让 Agent 参与调查，<br />让人掌握判断</h2>
+          <p>UniTracer 不只是自动跑完一次查询。用户可以在追踪过程中暂停、恢复、修改调查指令、检查证据，并决定下一步如何推进。</p>
+          <a class="button" href="#download">开始使用 <span class="arrow">→</span></a>
+        </div>
+        <div class="steps reveal">
+          <article class="step"><span class="step-no">01</span><div class="step-copy"><h3>输入线索，或交给 AI 梳理材料</h3><p>熟悉链上调查的用户可以直接填写源地址；不熟悉的用户可上传已有材料，通过对话生成追踪表单。</p><div class="step-tags"><span>PDF / XLSX / CSV</span><span>多源地址</span><span>调查指令</span></div></div></article>
+          <article class="step"><span class="step-no">02</span><div class="step-copy"><h3>启动追踪，实时观察 Agent 轨迹</h3><p>节点分析、下一跳入队和阶段性总结持续写入案件工作区，关系图自动刷新，关键进展同步出现在动态流中。</p><div class="step-tags"><span>NODE AGENT</span><span>SUMMARY AGENT</span><span>实时检查点</span></div></div></article>
+          <article class="step"><span class="step-no">03</span><div class="step-copy"><h3>探索图谱，回看每一步判断</h3><p>切换布局、拖动节点、过滤资产和时间范围，通过“追踪进度重放”还原资金网络逐步形成的过程。</p><div class="step-tags"><span>ForceAtlas2</span><span>进度重放</span><span>用户标签</span></div></div></article>
+          <article class="step"><span class="step-no">04</span><div class="step-copy"><h3>提问、归纳并导出案件</h3><p>直接向案件助手追问资金流向和可疑模式，结合阶段报告完成研判，再导出可离线查看的交互式快照。</p><div class="step-tags"><span>案件问答</span><span>阶段报告</span><span>离线 HTML</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="local">
+      <div class="container">
+        <div class="local-card reveal">
+          <div class="local-copy">
+            <span class="section-kicker">Local-first workspace</span>
+            <h2>案件留在本机，<br />控制权留给用户</h2>
+            <p>UniTracer 是跨平台桌面应用。案件数据库、材料、Agent 对话和追踪结果均写入用户指定目录；API Key 由用户配置，产品不托管案件数据。</p>
+            <div class="check-list">
+              <span><i>✓</i>自定义数据目录</span>
+              <span><i>✓</i>每案独立工作区</span>
+              <span><i>✓</i>用户自备 API Key</span>
+              <span><i>✓</i>断点恢复与本地检查点</span>
+              <span><i>✓</i>Windows / macOS / Linux</span>
+              <span><i>✓</i>离线 HTML 案件快照</span>
+            </div>
+          </div>
+          <div class="local-visual" aria-hidden="true">
+            <i class="orbit one"></i><i class="orbit two"></i>
+            <div class="vault"><strong>LOCAL</strong><span>CASE DATA · USER CONTROLLED</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="audience">
+      <div class="container">
+        <span class="section-kicker">Built for investigations</span>
+        <div class="section-heading reveal">
+          <h2>面向真正需要<br />理解链上资金的人</h2>
+          <p>无论用户是否具备区块链专业知识，都可以从已有线索开始，让系统逐步把交易数据转化为可理解的案件视图。</p>
+        </div>
+        <div class="audience-grid reveal">
+          <article class="audience-card"><span>01 / COMPLIANCE</span><h3>合规与风控团队</h3><p>快速核查异常资金路径、地址关联和交易对手，为风险处置保留结构化证据。</p></article>
+          <article class="audience-card"><span>02 / INVESTIGATION</span><h3>调查与研究人员</h3><p>把零散地址、交易记录和案件材料组织为可持续推进、可重复检查的调查空间。</p></article>
+          <article class="audience-card"><span>03 / ANALYSIS</span><h3>链上分析从业者</h3><p>减少数据抓取、脚本运行与人工整理之间的切换，把精力投入到真正需要判断的环节。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="download">
+      <div class="container">
+        <div class="cta-box reveal">
+          <span class="section-kicker">Start tracing with context</span>
+          <h2>从一个地址，开始还原全貌</h2>
+          <p>下载 UniTracer 桌面 Demo，在本机建立第一个可追踪、可对话、可复盘的区块链案件工作区。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://soft-disk-6b29.wuzhiying65.workers.dev/release/UniTracer-0.1.0-win-x64.zip">下载 Windows 便携版 <span class="arrow">↓</span></a>
+            <a class="button" href="#workflow">了解调查流程 <span class="arrow">↑</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <a class="brand" href="#top"><span class="brand-mark">UT</span><span class="brand-copy"><strong>UniTracer</strong><span>Desktop Investigator</span></span></a>
+      <p>© 2026 UNITRACER · AI-ASSISTED BLOCKCHAIN INVESTIGATION</p>
+      <div class="footer-links"><a href="#features">功能</a><a href="#local">本地数据</a><a href="#top">返回顶部</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const graphArea = document.querySelector('.graph-area');
+    let edgeLayoutFrame = 0;
+
+    function layoutPreviewEdges() {
+      if (!graphArea) return;
+      graphArea.querySelectorAll('.edge[data-from][data-to]').forEach((edge) => {
+        const source = graphArea.querySelector(`[data-node="${edge.dataset.from}"]`);
+        const target = graphArea.querySelector(`[data-node="${edge.dataset.to}"]`);
+        if (!source || !target) return;
+        const startX = source.offsetLeft + source.offsetWidth / 2;
+        const startY = source.offsetTop + source.offsetHeight / 2;
+        const endX = target.offsetLeft + target.offsetWidth / 2;
+        const endY = target.offsetTop + target.offsetHeight / 2;
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        edge.style.left = `${startX}px`;
+        edge.style.top = `${startY}px`;
+        edge.style.width = `${Math.hypot(deltaX, deltaY)}px`;
+        edge.style.transform = `rotate(${Math.atan2(deltaY, deltaX)}rad)`;
+      });
+    }
+
+    function schedulePreviewEdgeLayout() {
+      cancelAnimationFrame(edgeLayoutFrame);
+      edgeLayoutFrame = requestAnimationFrame(layoutPreviewEdges);
+    }
+
+    schedulePreviewEdgeLayout();
+    window.addEventListener('resize', schedulePreviewEdgeLayout);
+    if (graphArea && 'ResizeObserver' in window) {
+      new ResizeObserver(schedulePreviewEdgeLayout).observe(graphArea);
+    }
+
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
