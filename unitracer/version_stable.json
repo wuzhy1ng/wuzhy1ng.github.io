@@ -1,0 +1,11 @@
+{
+  "version": "0.1.1",
+  "publishedAt": "2026-08-09T12:00:00Z",
+  "notes": [
+    "修复模型选择问题",
+    "优化资金流图布局"
+  ],
+  "downloads": {
+    "win32-x64": "https://soft-disk-6b29.wuzhiying65.workers.dev/release/UniTracer-0.1.0-win-x64.zip"
+  }
+}
