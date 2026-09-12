@@ -1,11 +1,12 @@
 {
-  "version": "0.1.1",
-  "publishedAt": "2026-08-09T12:00:00Z",
+  "version": "0.1.2",
+  "publishedAt": "2026-09-12T10:50:47.791Z",
   "notes": [
-    "修复模型选择问题",
-    "优化资金流图布局"
+    "优化区块链交易追踪与智能体协作能力",
+    "改进案件状态投影和追踪结果展示",
+    "优化桌面端更新提示与整体使用体验"
   ],
   "downloads": {
-    "win32-x64": "https://soft-disk-6b29.wuzhiying65.workers.dev/release/UniTracer-0.1.1-win-x64.zip"
+    "win32-x64": "https://soft-disk-6b29.wuzhiying65.workers.dev/release/UniTracer-0.1.2-win-x64.zip"
   }
 }
